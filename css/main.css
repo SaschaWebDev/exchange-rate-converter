@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
 body {
   width: 100vw;
   height: 100vh;
   margin: 0px;
   padding: 0px;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -16,122 +19,75 @@ h1 {
   margin: 0px;
 }
 
-.from-container,
-.to-container {
+.exchange-container {
+  width: 100vw;
+  font-family: Poppins;
+}
+
+.top-container,
+.bottom-container {
   width: 100vw;
   height: 50vh;
 }
 
-.from-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  background-color: #302d45;
-}
-
-.to-container {
-  background-color: #222033;
-}
-
 .select-currency {
+  width: 100vw;
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.select-currency h2 {
+  color: white;
+}
+
+.top-container {
+  background-color: #302d45;
+  border-bottom: 2px solid rgba(79, 81, 87, 0.733);
+}
+
+.bottom-container {
+  background-color: #222033;
+}
+
+.currency-container {
+  display: flex;
+  width: 70%;
+}
+
+.currency-container div {
+  height: 3rem;
+  width: 10rem;
+  background: rgb(59, 73, 126);
+  box-shadow: 0 1px 100px rgba(44, 139, 216, 0.589);
+  transition: 0.5s ease-in;
+  display: flex;
   justify-content: center;
-  border: 1px solid red;
+  padding-top: 0rem;
+  border: 1px solid rgba(255, 255, 255, 0.253);
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-.dropdown {
-  margin-top: 50%;
-}
-
-ul {
-  margin: 0px;
-  padding: 0px;
-  list-style: none;
-}
-
-ul.dropdown {
-  position: relative;
+.currency-container div span {
+  color: white;
+  height: 100%;
   width: 100%;
-}
-
-ul.dropdown li {
-  font-weight: bold;
-  float: left;
-  width: 180px;
-  position: relative;
-  background: #ecf0f1;
-}
-
-ul.dropdown a:hover {
-  color: #000;
-}
-
-ul.dropdown li a {
-  display: block;
-  padding: 20px 8px;
-  color: #34495e;
-  position: relative;
-  z-index: 2000;
   text-align: center;
-  text-decoration: none;
-  font-weight: 300;
+  font-size: 2rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-ul.dropdown li a:hover,
-ul.dropdown li a.hover {
-  background: #3498db;
-  position: relative;
-  color: #fff;
-}
-
-ul.dropdown ul {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 180px;
-  z-index: 1000;
-}
-
-ul.dropdown ul li {
-  font-weight: normal;
-  background: #302d45;
-  color: #000;
-  border-bottom: 1px solid rgb(202, 92, 92);
-}
-
-ul.dropdown ul li a {
-  display: block;
-  color: #fff !important;
-  background: #302d45 !important;
-}
-
-ul.dropdown ul li a:hover {
-  display: block;
-  background: #4b3bb8 !important;
-  color: #fff !important;
-}
-
-.drop > a {
-  position: relative;
-}
-
-.drop > a:after {
-  content: "";
-  position: absolute;
-  right: 10px;
-  top: 40%;
-  border-left: 5px solid transparent;
-  border-top: 5px solid #333;
-  border-right: 5px solid transparent;
-  z-index: 999;
-}
-
-.drop > a:hover:after {
-  content: "";
-  border-left: 5px solid transparent;
-  border-top: 5px solid #fff;
-  border-right: 5px solid transparent;
+.currency-container div:hover {
+  background: #ff2f2f;
+  box-shadow: 0 7px 30px #ff2f2f;
+  cursor: pointer;
 }
