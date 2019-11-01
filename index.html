@@ -20,7 +20,13 @@
               <div><span>EUR</span></div>
             </div>
             <div class="from-input-container">
-              <input type="text" name="from-input" value="1" />
+              <input
+                type="text"
+                name="from-input"
+                value="1"
+                onkeyup="this.value = this.value.replace(/\D/g, '')"
+                maxlength="10"
+              />
             </div>
           </div>
         </div>
@@ -28,7 +34,13 @@
       <div class="bottom-container">
         <div class="bottom-elements">
           <div class="from-input-container to">
-            <input type="text" name="from-input" value="1" />
+            <input
+              type="text"
+              name="from-input"
+              value="9800"
+              maxlength="10"
+              onkeyup="this.value = this.value.replace(/\D/g, '')"
+            />
           </div>
           <div class="currency-container-bottom">
             <div><span>BTC</span></div>
