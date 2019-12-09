@@ -1,66 +1,26 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Exchange Rate Converter</title>
+    <script
+      src="https://kit.fontawesome.com/3da1a747b2.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/percentage-calc-favicon.png">
+    <title>Exchange Rate Converter</title>
   </head>
+
   <body>
-    <div class="exchange-container">
-      <div class="top-container">
-        <div class="select-currency">
-          <div><h2>Bitcoin Converter</h2></div>
-          <div class="top-elements">
-            <div class="currency-container">
-              <div><span class="active">BTC</span></div>
-              <div><span>Sats</span></div>
-              <div><span>USD</span></div>
-              <div><span>EUR</span></div>
-            </div>
-            <div class="from-input-container">
-              <input
-                type="text"
-                name="from-input"
-                value="1"
-                onkeyup="this.value = this.value.replace(/\D/g, '')"
-                maxlength="10"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bottom-container">
-        <div class="bottom-elements">
-          <div class="from-input-container to">
-            <input
-              type="text"
-              name="from-input"
-              value="9800"
-              maxlength="10"
-              onkeyup="this.value = this.value.replace(/\D/g, '')"
-            />
-          </div>
-          <div class="currency-container-bottom">
-            <div><span>BTC</span></div>
-            <div><span>Sats</span></div>
-            <div><span class="active-to">USD</span></div>
-            <div><span>EUR</span></div>
-          </div>
-        </div>
-      </div>
+    <div class="container">
+     <div class="top-container"></div>
+     <div class="bottom-container"></div>
     </div>
 
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"
-    ></script>
-    <!--     <script
-      type="text/javascript"
-      language="javascript"
-      src="js/jquery.dropdown.js"
-    ></script> -->
     <script src="js/main.js"></script>
+
   </body>
 </html>
