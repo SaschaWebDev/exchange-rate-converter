@@ -181,6 +181,16 @@ input[type="number"] {
   margin-left: 1rem;
 }
 
+.currency-pick-symbol-red {
+  background: url("/assets/chevron-right-red.png");
+  height: 1rem;
+  width: 1rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
 .currency-pick-right {
   margin-top: 0.7rem;
 }
@@ -237,7 +247,7 @@ input[type="number"] {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  height: 100%;
+  height: 50%;
 }
 
 .refresh-button {
@@ -248,7 +258,7 @@ input[type="number"] {
   border: none;
   border-radius: 10px;
   position: relative;
-  bottom: 2rem;
+  bottom: 1.5rem;
   outline: none;
   -webkit-box-shadow: 0px 0px 25px 2px rgba(83, 83, 83, 0.33);
   -moz-box-shadow: 0px 0px 25px 2px rgba(83, 83, 83, 0.33);
@@ -267,6 +277,97 @@ input[type="number"] {
 #refresh-symbol {
   transform: scale(2);
   color: #e84f4e;
+}
+
+.red {
+  color: #e84f4e;
+}
+
+.border-red {
+  border-bottom: 2px solid #e84f4e;
+}
+
+.input-row-two {
+  height: 100%;
+  margin-bottom: 20%;
+}
+
+.most-bottom-container {
+  height: 50%;
+}
+
+.author-row {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.author {
+  color: black;
+  display: flex;
+  margin-left: 1rem;
+}
+
+.heart {
+  background-image: url("/assets/heart-code-red.png");
+  height: 2rem;
+  width: 1.3rem;
+  background-repeat: no-repeat, repeat;
+  background-size: contain;
+  margin-left: 0.3rem;
+  margin-right: 0.4rem;
+}
+
+.heart-anchor {
+  padding-top: 0.45rem;
+}
+
+.hover-pointer:hover {
+  cursor: default;
+}
+
+.author-text {
+  font-size: 0.8rem;
+  padding-top: 0.5rem;
+}
+
+.author-text a,
+author-text:visited {
+  color: inherit;
+  text-decoration: none;
+  text-decoration: underline;
+}
+
+.currency-red {
+  font-size: 1.35rem;
+  color: rgba(232, 79, 78, 0.5);
+  letter-spacing: 3px;
+  margin-bottom: 0.2rem;
+  transition: 0.24s ease-in;
+}
+
+.currency-red:hover {
+  transform: scale(1.25);
+  transition: 0.25s ease-in;
+  color: rgba(232, 79, 78, 0.6);
+}
+
+.currency-red:active {
+  color: rgba(232, 79, 78, 0.8);
+}
+
+.active-red {
+  color: #e84f4e;
+  transform: scale(1.25);
+  transition: 0.25s ease-in;
+}
+
+.active-red:hover {
+  color: #e84f4e;
+}
+
+.container-red {
+  background: rgba(232, 79, 78, 0.05);
 }
 
 /* Menu Icon */
