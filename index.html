@@ -61,7 +61,28 @@
       </div>
     </div>
     <div class="bottom-container">
-
+      <div class="upper-container">
+        <button class="refresh-button" id="button-refresh">
+          <i class="fas fa-sync-alt" id="refresh-symbol"></i>
+        </button>
+      </div>
+      <div class="most-bottom-container"></div>
+      <div class="bottom-row">
+        <div class="bottom-left-container">
+          <input class="top-input" type="number" onkeydown="return (event.keyCode!=188)" value="1"></input>
+        </div>
+        <div class="bottom-right-container">
+          <div class="currency-pick-left">
+            <div class="currency-pick-symbol" id="picker"></div>
+          </div>
+          <div class="currency-pick-right">
+            <div class="currency active" id="btc">BTC</div>
+            <div class="currency" id="sat">SAT</div>
+            <div class="currency" id="usd">USD</div>
+            <div class="currency" id="eur">EUR</div>
+          </div>
+        </div>
+      </div>
       <!-- <div class="author">
         <div class="spacing-left author-text unselectable">Made with</div>
         <a class="heart-anchor" href="https://github.com/SaschaWebDev">
