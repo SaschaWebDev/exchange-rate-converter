@@ -209,6 +209,10 @@ input[type="number"] {
   transition: 0.25s ease-in;
 }
 
+.active:hover {
+  color: white;
+}
+
 #btc:hover + #picker {
   margin-top: 1rem;
 }
