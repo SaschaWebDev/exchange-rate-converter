@@ -32,6 +32,8 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: hidden;
   /* transition: background 1s linear; */
   background-image: linear-gradient(to top, #ffffff 0%, #f5d9d9 100%);
 }
@@ -252,17 +254,25 @@ input[type="number"] {
 
 .refresh-button {
   background: rgb(250, 236, 236);
-  height: 4rem;
-  width: 4rem;
-  margin-right: 5.8rem;
+
   border: none;
   border-radius: 10px;
-  position: relative;
-  bottom: 1.5rem;
+
   outline: none;
   -webkit-box-shadow: 0px 0px 25px 2px rgba(83, 83, 83, 0.33);
   -moz-box-shadow: 0px 0px 25px 2px rgba(83, 83, 83, 0.33);
   box-shadow: 0px 0px 25px 2px rgba(83, 83, 83, 0.33);
+
+  height: 4rem;
+  width: 4rem;
+  /* margin-right: 5.8rem;
+  position: relative;
+  bottom: 1.5rem; */
+  position: fixed;
+  padding: 2em;
+  left: 57.8%;
+  top: 50.7%;
+  transform: translate(-50%, -50%);
 }
 
 .refresh-button:hover {
@@ -289,7 +299,7 @@ input[type="number"] {
 
 .input-row-two {
   height: 100%;
-  margin-bottom: 20%;
+  margin-bottom: 18%;
 }
 
 .most-bottom-container {
@@ -306,6 +316,7 @@ input[type="number"] {
   color: black;
   display: flex;
   margin-left: 1rem;
+  margin-bottom: 0.15rem;
 }
 
 .heart {
@@ -368,8 +379,18 @@ author-text:visited {
 
 .container-red {
   background: rgba(232, 79, 78, 0.05);
+  border: 1px solid rgba(232, 79, 78, 0.03);
 }
 
+.conversion-arrow {
+  background-image: url("/assets/conversion.png");
+  background-repeat: no-repeat, repeat;
+  position: fixed;
+  padding: 2em;
+  left: 47%;
+  top: 51.7%;
+  transform: translate(-50%, -50%);
+}
 /* Menu Icon */
 
 .toggle {
