@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
+:root {
+  --menu-color: white;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -53,7 +57,7 @@ h6 {
 }
 
 .container {
-  background-color: #ffffff;
+  background-color: white;
   -webkit-box-shadow: 0px -1px 83px 9px rgba(138, 129, 126, 0.45);
   -moz-box-shadow: 0px -1px 83px 9px rgba(138, 126, 138, 0.45);
   box-shadow: 0px -1px 83px 9px rgba(138, 126, 138, 0.45);
@@ -61,7 +65,14 @@ h6 {
   max-width: 100%;
   min-width: 30rem;
   height: 75vh;
-  border-radius: 20px;
+  border-radius: 10px;
+  transition: 0.4 ease-in;
+}
+
+.bg-black {
+  background-color: rgb(41, 40, 40);
+  border-color: transparent;
+  transition: 0.4 ease-in;
 }
 
 .top-container {
@@ -99,6 +110,10 @@ h6 {
 .top-row {
   display: flex;
   justify-content: space-between;
+}
+
+.top-row-menu {
+  justify-content: flex-end;
 }
 
 .date,
@@ -209,6 +224,7 @@ input[type="number"] {
   transform: scale(1.25);
   transition: 0.25s ease-in;
   color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
 }
 
 .currency:active {
@@ -278,6 +294,7 @@ input[type="number"] {
 .refresh-button:hover {
   background: rgb(253, 244, 244);
   transition: background 0.2s ease-in;
+  cursor: pointer;
 }
 
 .refresh-button:active {
@@ -391,8 +408,35 @@ author-text:visited {
   top: 51.7%;
   transform: translate(-50%, -50%);
 }
-/* Menu Icon */
 
+.overlay {
+  width: 100%;
+  height: 50%;
+  z-index: 1999;
+  background-color: rgba(21, 100, 153, 0.5);
+  background-image: none;
+  transition: 0.35s ease-in;
+}
+
+.author-text-white {
+  color: white;
+}
+
+.menu-container {
+  margin-left: 3rem;
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.intro-text {
+  width: 100%;
+  word-wrap: break-word;
+}
+
+/* Menu Icon */
 .toggle {
   display: block;
   cursor: pointer;
@@ -440,7 +484,7 @@ author-text:visited {
   width: 47%;
   height: 2px;
   border-radius: 1px;
-  background: #fff;
+  background: var(--menu-color);
   position: absolute;
   -webkit-backface-visibility: hidden;
   transition: transform 0.5s ease, border-radius 0.3s ease, background 0.4s ease;
@@ -458,7 +502,7 @@ author-text:visited {
 .toggle input + div svg {
   display: block;
   fill: none;
-  stroke: #fff;
+  stroke: var(--menu-color);
   stroke-width: 2px;
   width: 44px;
   height: 44px;
@@ -483,7 +527,7 @@ author-text:visited {
 }
 .toggle input:checked + div div span:before,
 .toggle input:checked + div div span:after {
-  background: #fff;
+  background: var(--menu-color);
 }
 .toggle input:checked + div div span:first-child:before {
   transform: rotate(45deg) translate(2.2px, -3px) scaleX(1.05);
@@ -501,7 +545,7 @@ author-text:visited {
   stroke-dashoffset: 62;
   stroke-dasharray: 0 82.801 62 82.801;
   transform: rotate(90deg);
-  stroke: #fff;
+  stroke: var(--menu-color);
 }
 .toggle input:checked + div svg:nth-child(3) {
   transform: rotate(270deg);
