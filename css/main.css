@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -12,56 +14,244 @@
   user-select: none;
 }
 
-input, input:before, input:after {
+input,
+input:before,
+input:after {
   -webkit-user-select: initial;
   -khtml-user-select: initial;
   -moz-user-select: initial;
   -ms-user-select: initial;
   user-select: initial;
-} 
+}
 
 body {
   color: #fff;
   display: flex;
-  font-family: 'Muli', sans-serif;
+  font-family: "Montserrat", sans-serif;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   /* transition: background 1s linear; */
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background-image: linear-gradient(to top, #ffffff 0%, #f5d9d9 100%);
 }
 
 .dark-page-background {
   background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
-
 }
 
 p {
   margin: 5px 0;
 }
 
-h2, h6 {
+h2,
+h6 {
   margin: 10px 0 20px;
   text-align: center;
 }
 
 .container {
-  background-color: #222033;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px -1px 83px 9px rgba(138, 129, 126, 0.45);
+  -moz-box-shadow: 0px -1px 83px 9px rgba(138, 126, 138, 0.45);
+  box-shadow: 0px -1px 83px 9px rgba(138, 126, 138, 0.45);
   width: 30vw;
   max-width: 100%;
-  height: 75vh
+  height: 75vh;
+  border-radius: 20px;
 }
 
 .top-container {
   width: 100%;
   height: 50%;
-  background-image: linear-gradient(-45deg, #FFC796 0%, #FF6B95 100%);
+  background-image: linear-gradient(
+    25deg,
+    rgb(255, 199, 150) 0%,
+    rgb(231, 71, 71) 100%
+  );
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top: 1px solid rgba(153, 148, 148, 0.3);
+  border-left: 1px solid rgba(153, 148, 148, 0.3);
+  border-right: 1px solid rgba(153, 148, 148, 0.3);
+  display: flex;
+  flex-direction: column;
 }
 
 .bottom-container {
   width: 100%;
   height: 50%;
-  background: white;
+  background-image: linear-gradient(
+    20deg,
+    white 40%,
+    rgba(192, 185, 185, 0.5) 100%
+  );
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom: 1px solid rgba(153, 148, 148, 0.5);
+  border-left: 1px solid rgba(153, 148, 148, 0.5);
+  border-right: 1px solid rgba(153, 148, 148, 0.5);
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date,
+.toggle {
+  margin: 1.8rem;
+  margin-top: 1.5rem;
+}
+
+.middle-row {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  font-size: 2.5rem;
+  letter-spacing: 4px;
+}
+
+.chevron {
+  height: 1.3rem;
+  width: 1.3rem;
+  background: url("/assets/chevron.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+
+.bottom-right-container {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(90, 88, 88, 0.068);
+  height: 8rem;
+  width: 6rem;
+}
+
+/* Menu Icon */
+
+.toggle {
+  display: block;
+  cursor: pointer;
+}
+.toggle input {
+  display: none;
+}
+.toggle input + div {
+  width: 20px;
+  height: 14px;
+  position: relative;
+}
+.toggle input + div div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: transform 0.5s ease;
+}
+.toggle input + div div span {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.toggle input + div div span:first-child {
+  top: 0;
+}
+.toggle input + div div span:first-child:before,
+.toggle input + div div span:first-child:after {
+  top: 0;
+}
+.toggle input + div div span:last-child {
+  bottom: 0;
+}
+.toggle input + div div span:last-child:before,
+.toggle input + div div span:last-child:after {
+  bottom: 0;
+}
+.toggle input + div div span:before,
+.toggle input + div div span:after {
+  content: "";
+  display: block;
+  width: 47%;
+  height: 2px;
+  border-radius: 1px;
+  background: #fff;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.5s ease, border-radius 0.3s ease, background 0.4s ease;
+}
+.toggle input + div div span:before {
+  left: 0;
+  transform-origin: 0 50%;
+  transform: translate(1px, 0) scaleX(1.1);
+}
+.toggle input + div div span:after {
+  right: 0;
+  transform-origin: 100% 50%;
+  transform: translate(-1px, 0) scaleX(1.1);
+}
+.toggle input + div svg {
+  display: block;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2px;
+  width: 44px;
+  height: 44px;
+  stroke-linecap: round;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -22px 0 0 -22px;
+  stroke-dasharray: 0 82.801 8 82.801;
+  stroke-dashoffset: 82.801;
+  transform-origin: 50% 50%;
+  -webkit-backface-visibility: hidden;
+  transform: scale(1);
+  transition: stroke-dashoffset 0.5s ease, stroke-dasharray 0.6s ease,
+    transform 0.5s ease, stroke 0.4s ease;
+}
+.toggle input + div svg:nth-child(3) {
+  transform: rotate(180deg) scale(1);
+}
+.toggle input:checked + div div {
+  transform: rotate(90deg);
+}
+.toggle input:checked + div div span:before,
+.toggle input:checked + div div span:after {
+  background: #fff;
+}
+.toggle input:checked + div div span:first-child:before {
+  transform: rotate(45deg) translate(2.2px, -3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:first-child:after {
+  transform: rotate(-45deg) translate(-2.2px, -3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:last-child:before {
+  transform: rotate(-45deg) translate(2.2px, 3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:last-child:after {
+  transform: rotate(45deg) translate(-2.2px, 3px) scaleX(1.05);
+}
+.toggle input:checked + div svg {
+  stroke-dashoffset: 62;
+  stroke-dasharray: 0 82.801 62 82.801;
+  transform: rotate(90deg);
+  stroke: #fff;
+}
+.toggle input:checked + div svg:nth-child(3) {
+  transform: rotate(270deg);
 }

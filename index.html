@@ -1,26 +1,67 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <script
-      src="https://kit.fontawesome.com/3da1a747b2.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/percentage-calc-favicon.png">
-    <title>Exchange Rate Converter</title>
-  </head>
 
-  <body>
-    <div class="container">
-     <div class="top-container"></div>
-     <div class="bottom-container"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <script src="https://kit.fontawesome.com/3da1a747b2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/percentage-calc-favicon.png">
+  <title>Exchange Rate Converter</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="top-container">
+      <div class="top-row">
+        <div class="date">updating...</div>
+        <label class="toggle">
+          <input type="checkbox">
+          <div>
+            <div>
+              <span></span>
+              <span></span>
+            </div>
+            <svg>
+              <use xlink:href="#path">
+            </svg>
+            <svg>
+              <use xlink:href="#path">
+            </svg>
+          </div>
+        </label>
+
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" id="path">
+            <path d="M22,22 L2,22 C2,11 11,2 22,2 C33,2 42,11 42,22"></path>
+          </symbol>
+        </svg>
+      </div>
+      <div class="middle-row">
+        <span class="header">Currency</span>
+        <div class="chevron"></div>
+      </div>
+      <div class="bottom-row">
+        <div class="bottom-left-container"></div>
+        <div class="bottom-right-container"></div>
+      </div>
+    </div>
+    <div class="bottom-container">
+
+      <!-- <div class="author">
+        <div class="spacing-left author-text unselectable">Made with</div>
+        <a class="heart-anchor" href="https://github.com/SaschaWebDev">
+          <div class="heart"></div>
+        </a>
+        <div class="author-text unselectable">by <a href="http://www.saschamajewsky.de">Sascha Majewsky</a></div>
+      </div> -->
     </div>
 
     <script src="js/main.js"></script>
 
-  </body>
+</body>
+
 </html>
