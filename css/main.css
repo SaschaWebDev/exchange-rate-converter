@@ -196,10 +196,30 @@ input[type="number"] {
 .currency:hover {
   transform: scale(1.25);
   transition: 0.25s ease-in;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.currency:active {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .active {
   color: white;
+  transform: scale(1.25);
+  transition: 0.25s ease-in;
+}
+
+#btc:hover + #picker {
+  margin-top: 1rem;
+}
+#sat:hover + #picker {
+  margin-top: 2rem;
+}
+#usd:hover + #picker {
+  margin-top: 3rem;
+}
+#eur:hover + #picker {
+  margin-top: 4rem;
 }
 
 /* Menu Icon */
