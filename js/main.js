@@ -53,6 +53,7 @@ window.onload = () => {
   // load / set localStorage for preference currency pair
   if (localStorage.getItem("currency-top") === null) {
     localStorage.setItem("currency-top", "btc");
+    selectBTCTop();
   } else {
     deleteActive();
     if (localStorage.getItem("currency-top") === "btc") {
@@ -68,6 +69,7 @@ window.onload = () => {
 
   if (localStorage.getItem("currency-bottom") === null) {
     localStorage.setItem("currency-bottom", "usd");
+    selectUSDBottom();
   } else {
     deleteActiveBottom();
     if (localStorage.getItem("currency-bottom") === "btc") {
@@ -246,6 +248,7 @@ selectBTCTop = () => {
   deleteActive();
   btcTop.classList.add("active");
   localStorage.setItem("currency-top", "btc");
+  localStorage.setItem("currency-top-counter", "1");
 };
 
 selectSATTop = () => {
@@ -254,6 +257,7 @@ selectSATTop = () => {
   deleteActive();
   satTop.classList.add("active");
   localStorage.setItem("currency-top", "sat");
+  localStorage.setItem("currency-top-counter", "2");
 };
 
 selectUSDTop = () => {
@@ -262,6 +266,7 @@ selectUSDTop = () => {
   deleteActive();
   usdTop.classList.add("active");
   localStorage.setItem("currency-top", "usd");
+  localStorage.setItem("currency-top-counter", "3");
 };
 
 selectEURTop = () => {
@@ -270,6 +275,7 @@ selectEURTop = () => {
   deleteActive();
   eurTop.classList.add("active");
   localStorage.setItem("currency-top", "eur");
+  localStorage.setItem("currency-top-counter", "4");
 };
 
 selectBTCBottom = () => {
@@ -278,6 +284,7 @@ selectBTCBottom = () => {
   deleteActiveBottom();
   btcBottom.classList.add("active-red");
   localStorage.setItem("currency-bottom", "btc");
+  localStorage.setItem("currency-bottom-counter", "1");
 };
 
 selectSATBottom = () => {
@@ -286,6 +293,7 @@ selectSATBottom = () => {
   deleteActiveBottom();
   satBottom.classList.add("active-red");
   localStorage.setItem("currency-bottom", "sat");
+  localStorage.setItem("currency-bottom-counter", "2");
 };
 
 selectUSDBottom = () => {
@@ -294,6 +302,7 @@ selectUSDBottom = () => {
   deleteActiveBottom();
   usdBottom.classList.add("active-red");
   localStorage.setItem("currency-bottom", "usd");
+  localStorage.setItem("currency-bottom-counter", "3");
 };
 
 selectEURBottom = () => {
@@ -302,6 +311,7 @@ selectEURBottom = () => {
   deleteActiveBottom();
   eurBottom.classList.add("active-red");
   localStorage.setItem("currency-bottom", "eur");
+  localStorage.setItem("currency-bottom-counter", "4");
 };
 
 // Navigation
