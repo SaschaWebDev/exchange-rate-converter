@@ -7,6 +7,7 @@ const topContainer = document.querySelector(".top-container");
 const bottomContainer = document.querySelector(".bottom-container");
 const topRow = document.querySelector(".top-row");
 const middleRow = document.querySelector(".middle-row");
+const amountInput = document.querySelector(".top-input");
 const bottomRow = document.querySelector(".bottom-row");
 const inputRowTwo = document.querySelector(".input-row-two");
 const resultInput = document.querySelector(".result-input");
@@ -33,6 +34,8 @@ const picker = document.getElementById("picker");
 const pickerRed = document.getElementById("picker-red");
 
 const date = document.querySelector(".date");
+
+let priceFetching = false;
 
 // Vanilla JavaScript allows no API key hiding or environmental variable usage
 // A back-end solution just for this would render in a bad experience for users
@@ -251,6 +254,7 @@ selectBTCTop = () => {
     btcTop.classList.add("active");
     localStorage.setItem("currency-top", "btc");
     localStorage.setItem("currency-top-counter", "1");
+    triggerConvertion();
   } else {
     setErrorShakeEffect("btc-top");
   }
@@ -264,6 +268,7 @@ selectSATTop = () => {
     satTop.classList.add("active");
     localStorage.setItem("currency-top", "sat");
     localStorage.setItem("currency-top-counter", "2");
+    triggerConvertion();
   } else {
     setErrorShakeEffect("sat-top");
   }
@@ -277,6 +282,7 @@ selectUSDTop = () => {
     usdTop.classList.add("active");
     localStorage.setItem("currency-top", "usd");
     localStorage.setItem("currency-top-counter", "3");
+    triggerConvertion();
   } else {
     setErrorShakeEffect("usd-top");
   }
@@ -290,6 +296,7 @@ selectEURTop = () => {
     eurTop.classList.add("active");
     localStorage.setItem("currency-top", "eur");
     localStorage.setItem("currency-top-counter", "4");
+    triggerConvertion();
   } else {
     setErrorShakeEffect("eur-top");
   }
@@ -303,6 +310,7 @@ selectBTCBottom = () => {
     btcBottom.classList.add("active-red");
     localStorage.setItem("currency-bottom", "btc");
     localStorage.setItem("currency-bottom-counter", "1");
+    triggerConvertion();
   } else {
     setErrorShakeEffect("btc-bottom");
   }
@@ -316,6 +324,7 @@ selectSATBottom = () => {
     satBottom.classList.add("active-red");
     localStorage.setItem("currency-bottom", "sat");
     localStorage.setItem("currency-bottom-counter", "2");
+    triggerConvertion();
   } else {
     setErrorShakeEffect("sat-bottom");
   }
@@ -329,6 +338,7 @@ selectUSDBottom = () => {
     usdBottom.classList.add("active-red");
     localStorage.setItem("currency-bottom", "usd");
     localStorage.setItem("currency-bottom-counter", "3");
+    triggerConvertion();
   } else {
     setErrorShakeEffect("usd-bottom");
   }
@@ -342,6 +352,7 @@ selectEURBottom = () => {
     eurBottom.classList.add("active-red");
     localStorage.setItem("currency-bottom", "eur");
     localStorage.setItem("currency-bottom-counter", "4");
+    triggerConvertion();
   } else {
     setErrorShakeEffect("eur-bottom");
   }
@@ -609,3 +620,38 @@ resultInput.addEventListener("click", () => {
     textarea.remove();
   }
 });
+
+// Convertion
+
+// Menu Overlay
+
+amountInput.addEventListener("beforeinput", e => {
+  if (e.target.value == "") {
+    e.target.value = 1;
+  } else {
+    triggerConvertion();
+  }
+});
+
+triggerConvertion = () => {
+  if (resultInput.value !== "") {
+    if (localStorage.getItem("currency-top") === "btc") {
+      if (localStorage.getItem("currency-bottom") === "sat") {
+        resultInput.value = bitcoinToSatoshi(
+          parseFloat(amountInput.value)
+        ).toFixed(0);
+      }
+    } else if (localStorage.getItem("currency-top") === "sat") {
+      if (localStorage.getItem("currency-bottom") === "btc") {
+        resultInput.value = satoshiToBitcoin(
+          parseFloat(amountInput.value)
+        ).toFixed(8);
+      }
+    }
+  }
+};
+
+// Price calculation
+bitcoinToSatoshi = amountBitcoin => amountBitcoin * 100_000_000;
+
+satoshiToBitcoin = amountSatoshi => amountSatoshi / 100_000_000;
