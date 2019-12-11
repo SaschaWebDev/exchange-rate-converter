@@ -305,8 +305,12 @@ input[type="number"] {
   background: rgb(255, 255, 255);
 }
 
+.refresh-button-clicked {
+  background: rgb(255, 255, 255);
+  transition: 0.3s ease-in-out;
+}
+
 #refresh-symbol {
-  transform: scale(2);
   color: #e84f4e;
 }
 
@@ -459,6 +463,11 @@ author-text:visited {
   word-wrap: break-word;
   color: #ccd8f1;
   margin-bottom: 2rem;
+}
+
+.features ul li {
+  margin-bottom: 0.1rem;
+  color: #ccd8f1;
 }
 
 /* Menu Icon */

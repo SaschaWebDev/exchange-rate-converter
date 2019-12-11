@@ -13,9 +13,11 @@ const inputRowTwo = document.querySelector(".input-row-two");
 const menuToggle = document.querySelector(".toggle");
 const menuCheckbox = document.getElementById("menu-checkbox");
 const refreshButton = document.querySelector(".refresh-button");
+const refreshSymbol = document.getElementById("refresh-symbol");
 const conversionArrow = document.querySelector(".conversion-arrow");
 const authorText = document.querySelectorAll(".author-text");
 const hiddenElements = document.querySelectorAll(".hidden");
+
 const date = document.querySelector(".date");
 
 // Get current date
@@ -62,3 +64,47 @@ menuCheckbox.addEventListener("change", () => {
     hiddenElements.forEach(element => element.classList.add("hidden"));
   }
 });
+
+refreshButton.addEventListener("click", () => {
+  refreshSymbol.classList.add("fa-spin");
+  setTimeout(function() {
+    refreshSymbol.classList.remove("fa-spin");
+  }, 1000);
+});
+
+// Navigation
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+  e = e || window.event;
+
+  // up arrow
+  if (e.keyCode == "38") {
+    alert("arrow up");
+
+    // down arrow
+  } else if (e.keyCode == "40") {
+    alert("arrow down");
+
+    // left arrow
+  } else if (e.keyCode == "37") {
+    alert("arrow left");
+
+    // right arrow
+  } else if (e.keyCode == "39") {
+    alert("arrow right");
+
+    // space
+  } else if (e.keyCode == "32") {
+    refreshButton.click();
+    refreshButton.classList.add("refresh-button-clicked");
+    setTimeout(function() {
+      refreshButton.classList.remove("refresh-button-clicked");
+    }, 1000);
+
+    // escape
+  } else if (e.keyCode == "27") {
+    menuCheckbox.click();
+  }
+}
