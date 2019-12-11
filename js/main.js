@@ -627,7 +627,7 @@ resultInput.addEventListener("click", () => {
 
 amountInput.addEventListener("beforeinput", e => {
   if (e.target.value == "") {
-    e.target.value = 1;
+    // e.target.value = 1;
   } else {
     triggerConvertion();
   }
@@ -645,7 +645,11 @@ triggerConvertion = () => {
       if (localStorage.getItem("currency-bottom") === "btc") {
         resultInput.value = satoshiToBitcoin(
           parseFloat(amountInput.value)
-        ).toFixed(8);
+        ).toLocaleString("en-US", {
+          style: "decimal",
+          currency: "USD",
+          minimumFractionDigits: 8
+        });
       }
     }
   }
