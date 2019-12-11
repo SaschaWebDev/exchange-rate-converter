@@ -306,7 +306,6 @@ input[type="number"] {
   align-items: center;
 }
 
-.refresh-button:active,
 .refresh-button-triggered {
   background: #e3edf7;
   box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48),

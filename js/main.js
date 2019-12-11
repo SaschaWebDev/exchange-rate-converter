@@ -101,10 +101,18 @@ menuCheckbox.addEventListener("change", () => {
 
 // Data fetch and Refresh Button
 refreshButton.addEventListener("click", () => {
-  refreshSymbol.classList.add("fa-spin");
-  setTimeout(function() {
-    refreshSymbol.classList.remove("fa-spin");
-  }, 1000);
+  if (document.querySelectorAll(".fa-spin").length < 1) {
+    refreshSymbol.classList.add("fa-spin");
+    refreshButton.classList.add("refresh-button-triggered");
+
+    setTimeout(function() {
+      refreshButton.classList.remove("refresh-button-triggered");
+    }, 100);
+
+    setTimeout(function() {
+      refreshSymbol.classList.remove("fa-spin");
+    }, 1000);
+  }
 });
 
 // Currency selecting
@@ -251,12 +259,13 @@ function checkKey(e) {
 
     // space
   } else if (e.keyCode == "32") {
-    refreshButton.click();
-    refreshButton.classList.add("refresh-button-triggered");
-    setTimeout(function() {
-      refreshButton.classList.remove("refresh-button-triggered");
-    }, 150);
-
+    if (document.querySelectorAll(".fa-spin").length < 1) {
+      refreshButton.click();
+      refreshButton.classList.add("refresh-button-triggered");
+      setTimeout(function() {
+        refreshButton.classList.remove("refresh-button-triggered");
+      }, 150);
+    }
     // escape
   } else if (e.keyCode == "27") {
     menuCheckbox.click();
