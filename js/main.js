@@ -53,15 +53,43 @@ window.onload = () => {
   // load / set localStorage for preference currency pair
   if (localStorage.getItem("currency-top") === null) {
     localStorage.setItem("currency-top", "btc");
+  } else {
+    deleteActive();
+    if (localStorage.getItem("currency-top") === "btc") {
+      selectBTCTop();
+    } else if (localStorage.getItem("currency-top") === "sat") {
+      selectSATTop();
+    } else if (localStorage.getItem("currency-top") === "usd") {
+      selectUSDTop();
+    } else if (localStorage.getItem("currency-top") === "eur") {
+      selectEURTop();
+    }
   }
 
   if (localStorage.getItem("currency-bottom") === null) {
     localStorage.setItem("currency-bottom", "usd");
+  } else {
+    deleteActiveBottom();
+    if (localStorage.getItem("currency-bottom") === "btc") {
+      selectBTCBottom();
+    } else if (localStorage.getItem("currency-bottom") === "sat") {
+      selectSATBottom();
+    } else if (localStorage.getItem("currency-bottom") === "usd") {
+      selectUSDBottom();
+    } else if (localStorage.getItem("currency-bottom") === "eur") {
+      selectEURBottom();
+    }
   }
+
+  // LADEN AKTIV AUS LOCAL STORAGE UNS SETZEN
 
   // set picker to active elements
   setTopSelection(activeTop()[0].id);
   setBottomSelection(activeBottom()[0].id);
+
+  // Initialize Navigation
+  // setTopSelectionCount();
+  // setBottomSelectionCount();
 };
 
 // Menu Overlay
@@ -115,76 +143,52 @@ refreshButton.addEventListener("click", () => {
   }
 });
 
-// Currency selecting
+// Currency on Click
 btcTop.addEventListener("click", () => {
   if (activeTop()[0].id !== "btc") {
-    deleteSelection(picker);
-    picker.classList.add("selected-top-first");
-    deleteActive();
-    btcTop.classList.add("active");
+    selectBTCTop();
   }
 });
 
 satTop.addEventListener("click", () => {
   if (activeTop()[0].id !== "sat") {
-    deleteSelection(picker);
-    picker.classList.add("selected-top-second");
-    deleteActive();
-    satTop.classList.add("active");
+    selectSATTop();
   }
 });
 
 usdTop.addEventListener("click", () => {
   if (activeTop()[0].id !== "usd") {
-    deleteSelection(picker);
-    picker.classList.add("selected-top-third");
-    deleteActive();
-    usdTop.classList.add("active");
+    selectUSDTop();
   }
 });
 
 eurTop.addEventListener("click", () => {
   if (activeTop()[0].id !== "eur") {
-    deleteSelection(picker);
-    picker.classList.add("selected-top-fourth");
-    deleteActive();
-    eurTop.classList.add("active");
+    selectEURTop();
   }
 });
 
 btcBottom.addEventListener("click", () => {
   if (activeBottom()[0].id !== "btc-red") {
-    deleteSelection(pickerRed);
-    pickerRed.classList.add("selected-bottom-first");
-    deleteActiveBottom();
-    btcBottom.classList.add("active-red");
+    selectBTCBottom();
   }
 });
 
 satBottom.addEventListener("click", () => {
   if (activeBottom()[0].id !== "sat-red") {
-    deleteSelection(pickerRed);
-    pickerRed.classList.add("selected-bottom-second");
-    deleteActiveBottom();
-    satBottom.classList.add("active-red");
+    selectSATBottom();
   }
 });
 
 usdBottom.addEventListener("click", () => {
   if (activeBottom()[0].id !== "usd-red") {
-    deleteSelection(pickerRed);
-    pickerRed.classList.add("selected-bottom-third");
-    deleteActiveBottom();
-    usdBottom.classList.add("active-red");
+    selectUSDBottom();
   }
 });
 
 eurBottom.addEventListener("click", () => {
   if (activeBottom()[0].id !== "eur-red") {
-    deleteSelection(pickerRed);
-    pickerRed.classList.add("selected-bottom-fourth");
-    deleteActiveBottom();
-    eurBottom.classList.add("active-red");
+    selectEURBottom();
   }
 });
 
@@ -233,6 +237,71 @@ setBottomSelection = elementId => {
   } else if (elementId === "eur-red") {
     pickerRed.classList.add("selected-bottom-fourth");
   }
+};
+
+// Currency selection
+selectBTCTop = () => {
+  deleteSelection(picker);
+  picker.classList.add("selected-top-first");
+  deleteActive();
+  btcTop.classList.add("active");
+  localStorage.setItem("currency-top", "btc");
+};
+
+selectSATTop = () => {
+  deleteSelection(picker);
+  picker.classList.add("selected-top-second");
+  deleteActive();
+  satTop.classList.add("active");
+  localStorage.setItem("currency-top", "sat");
+};
+
+selectUSDTop = () => {
+  deleteSelection(picker);
+  picker.classList.add("selected-top-third");
+  deleteActive();
+  usdTop.classList.add("active");
+  localStorage.setItem("currency-top", "usd");
+};
+
+selectEURTop = () => {
+  deleteSelection(picker);
+  picker.classList.add("selected-top-fourth");
+  deleteActive();
+  eurTop.classList.add("active");
+  localStorage.setItem("currency-top", "eur");
+};
+
+selectBTCBottom = () => {
+  deleteSelection(pickerRed);
+  pickerRed.classList.add("selected-bottom-first");
+  deleteActiveBottom();
+  btcBottom.classList.add("active-red");
+  localStorage.setItem("currency-bottom", "btc");
+};
+
+selectSATBottom = () => {
+  deleteSelection(pickerRed);
+  pickerRed.classList.add("selected-bottom-second");
+  deleteActiveBottom();
+  satBottom.classList.add("active-red");
+  localStorage.setItem("currency-bottom", "sat");
+};
+
+selectUSDBottom = () => {
+  deleteSelection(pickerRed);
+  pickerRed.classList.add("selected-bottom-third");
+  deleteActiveBottom();
+  usdBottom.classList.add("active-red");
+  localStorage.setItem("currency-bottom", "usd");
+};
+
+selectEURBottom = () => {
+  deleteSelection(pickerRed);
+  pickerRed.classList.add("selected-bottom-fourth");
+  deleteActiveBottom();
+  eurBottom.classList.add("active-red");
+  localStorage.setItem("currency-bottom", "eur");
 };
 
 // Navigation
