@@ -29,6 +29,7 @@ const usdBottom = document.getElementById("usd-red");
 const eurBottom = document.getElementById("eur-red");
 
 const picker = document.getElementById("picker");
+const pickerRed = document.getElementById("picker-red");
 
 const date = document.querySelector(".date");
 
@@ -57,6 +58,10 @@ window.onload = () => {
   if (localStorage.getItem("currency-bottom") === null) {
     localStorage.setItem("currency-bottom", "usd");
   }
+
+  // set picker to active elements
+  setTopSelection(activeTop()[0].id);
+  setBottomSelection(activeBottom()[0].id);
 };
 
 // Menu Overlay
@@ -139,6 +144,42 @@ eurTop.addEventListener("click", () => {
   }
 });
 
+btcBottom.addEventListener("click", () => {
+  if (activeBottom()[0].id !== "btc-red") {
+    deleteSelection(pickerRed);
+    pickerRed.classList.add("selected-bottom-first");
+    deleteActiveBottom();
+    btcBottom.classList.add("active-red");
+  }
+});
+
+satBottom.addEventListener("click", () => {
+  if (activeBottom()[0].id !== "sat-red") {
+    deleteSelection(pickerRed);
+    pickerRed.classList.add("selected-bottom-second");
+    deleteActiveBottom();
+    satBottom.classList.add("active-red");
+  }
+});
+
+usdBottom.addEventListener("click", () => {
+  if (activeBottom()[0].id !== "usd-red") {
+    deleteSelection(pickerRed);
+    pickerRed.classList.add("selected-bottom-third");
+    deleteActiveBottom();
+    usdBottom.classList.add("active-red");
+  }
+});
+
+eurBottom.addEventListener("click", () => {
+  if (activeBottom()[0].id !== "eur-red") {
+    deleteSelection(pickerRed);
+    pickerRed.classList.add("selected-bottom-fourth");
+    deleteActiveBottom();
+    eurBottom.classList.add("active-red");
+  }
+});
+
 activeTop = () => document.querySelectorAll(".active");
 activeBottom = () => document.querySelectorAll(".active-red");
 deleteSelection = element => {
@@ -156,6 +197,35 @@ deleteActive = () =>
   document
     .querySelectorAll(".active")
     .forEach(element => element.classList.remove("active"));
+deleteActiveBottom = () =>
+  document
+    .querySelectorAll(".active-red")
+    .forEach(element => element.classList.remove("active-red"));
+
+// Initialization Currency Selection
+setTopSelection = elementId => {
+  if (elementId === "btc") {
+    picker.classList.add("selected-top-first");
+  } else if (elementId === "sat") {
+    picker.classList.add("selected-top-second");
+  } else if (elementId === "usd") {
+    picker.classList.add("selected-top-third");
+  } else if (elementId === "eur") {
+    picker.classList.add("selected-top-fourth");
+  }
+};
+
+setBottomSelection = elementId => {
+  if (elementId === "btc-red") {
+    pickerRed.classList.add("selected-bottom-first");
+  } else if (elementId === "sat-red") {
+    pickerRed.classList.add("selected-bottom-second");
+  } else if (elementId === "usd-red") {
+    pickerRed.classList.add("selected-bottom-third");
+  } else if (elementId === "eur-red") {
+    pickerRed.classList.add("selected-bottom-fourth");
+  }
+};
 
 // Navigation
 document.onkeydown = checkKey;
@@ -182,10 +252,10 @@ function checkKey(e) {
     // space
   } else if (e.keyCode == "32") {
     refreshButton.click();
-    refreshButton.classList.add("refresh-button-clicked");
+    refreshButton.classList.add("refresh-button-triggered");
     setTimeout(function() {
-      refreshButton.classList.remove("refresh-button-clicked");
-    }, 1000);
+      refreshButton.classList.remove("refresh-button-triggered");
+    }, 150);
 
     // escape
   } else if (e.keyCode == "27") {
