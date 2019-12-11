@@ -488,9 +488,29 @@ selectNewCurrency = (newIndex, panel) => {
     if (newIndex == 1) {
       selectBTCTop();
     } else if (newIndex == 2) {
-      selectSATTop();
+      if (selectionIsBlocked(newIndex, panel)) {
+        if (newIndex > parseInt(localStorage.getItem("currency-top-counter"))) {
+          selectUSDTop();
+        } else if (
+          newIndex < parseInt(localStorage.getItem("currency-top-counter"))
+        ) {
+          selectBTCTop();
+        }
+      } else {
+        selectSATTop();
+      }
     } else if (newIndex == 3) {
-      selectUSDTop();
+      if (selectionIsBlocked(newIndex, panel)) {
+        if (newIndex > parseInt(localStorage.getItem("currency-top-counter"))) {
+          selectEURTop();
+        } else if (
+          newIndex < parseInt(localStorage.getItem("currency-top-counter"))
+        ) {
+          selectSATTop();
+        }
+      } else {
+        selectUSDTop();
+      }
     } else if (newIndex == 4) {
       selectEURTop();
     }
@@ -498,13 +518,80 @@ selectNewCurrency = (newIndex, panel) => {
     if (newIndex == 1) {
       selectBTCBottom();
     } else if (newIndex == 2) {
-      selectSATBottom();
+      if (selectionIsBlocked(newIndex, panel)) {
+        if (
+          newIndex > parseInt(localStorage.getItem("currency-bottom-counter"))
+        ) {
+          selectUSDBottom();
+        } else if (
+          newIndex < parseInt(localStorage.getItem("currency-bottom-counter"))
+        ) {
+          selectBTCBottom();
+        }
+      } else {
+        selectSATBottom();
+      }
     } else if (newIndex == 3) {
-      selectUSDBottom();
+      if (selectionIsBlocked(newIndex, panel)) {
+        if (
+          newIndex > parseInt(localStorage.getItem("currency-bottom-counter"))
+        ) {
+          selectEURBottom();
+        } else if (
+          newIndex < parseInt(localStorage.getItem("currency-bottom-counter"))
+        ) {
+          selectSATBottom();
+        }
+      } else {
+        selectUSDBottom();
+      }
     } else if (newIndex == 4) {
       selectEURBottom();
     }
   }
+};
+
+selectionIsBlocked = (newIndex, panel) => {
+  if (panel === "top") {
+    if (localStorage.getItem("currency-bottom") === "btc" && newIndex == 1) {
+      return true;
+    } else if (
+      localStorage.getItem("currency-bottom") === "sat" &&
+      newIndex == 2
+    ) {
+      return true;
+    } else if (
+      localStorage.getItem("currency-bottom") === "usd" &&
+      newIndex == 3
+    ) {
+      return true;
+    } else if (
+      localStorage.getItem("currency-bottom") === "eur" &&
+      newIndex == 4
+    ) {
+      return true;
+    }
+  } else if (panel === "bottom") {
+    if (localStorage.getItem("currency-top") === "btc" && newIndex == 1) {
+      return true;
+    } else if (
+      localStorage.getItem("currency-top") === "sat" &&
+      newIndex == 2
+    ) {
+      return true;
+    } else if (
+      localStorage.getItem("currency-top") === "usd" &&
+      newIndex == 3
+    ) {
+      return true;
+    } else if (
+      localStorage.getItem("currency-top") === "eur" &&
+      newIndex == 4
+    ) {
+      return true;
+    }
+  }
+  return false;
 };
 
 // Copy to clipboard
