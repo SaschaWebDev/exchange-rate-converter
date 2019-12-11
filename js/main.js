@@ -9,6 +9,7 @@ const topRow = document.querySelector(".top-row");
 const middleRow = document.querySelector(".middle-row");
 const bottomRow = document.querySelector(".bottom-row");
 const inputRowTwo = document.querySelector(".input-row-two");
+const resultInput = document.querySelector(".result-input");
 
 const menuToggle = document.querySelector(".toggle");
 const menuCheckbox = document.getElementById("menu-checkbox");
@@ -505,3 +506,19 @@ selectNewCurrency = (newIndex, panel) => {
     }
   }
 };
+
+// Copy to clipboard
+resultInput.addEventListener("click", () => {
+  const textarea = document.createElement("textarea");
+  const result = resultInput.value;
+
+  if (!result) {
+    return;
+  } else {
+    textarea.value = result;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+  }
+});
