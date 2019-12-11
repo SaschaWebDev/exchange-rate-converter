@@ -1,61 +1,110 @@
-/*
- *
- * Credits to https://css-tricks.com/long-dropdowns-solution/
- *
- */
+// DOM Elements
+let root = document.documentElement;
+const body = document.body;
 
-var maxHeight = 400;
+const container = document.querySelector(".container");
+const topContainer = document.querySelector(".top-container");
+const bottomContainer = document.querySelector(".bottom-container");
+const topRow = document.querySelector(".top-row");
+const middleRow = document.querySelector(".middle-row");
+const bottomRow = document.querySelector(".bottom-row");
+const inputRowTwo = document.querySelector(".input-row-two");
 
-$(function() {
-  $(".dropdown > li").hover(
-    function() {
-      var $container = $(this),
-        $list = $container.find("ul"),
-        $anchor = $container.find("a"),
-        height = $list.height() * 1.1, // make sure there is enough room at the bottom
-        multiplier = height / maxHeight; // needs to move faster if list is taller
+const menuToggle = document.querySelector(".toggle");
+const menuCheckbox = document.getElementById("menu-checkbox");
+const refreshButton = document.querySelector(".refresh-button");
+const refreshSymbol = document.getElementById("refresh-symbol");
+const conversionArrow = document.querySelector(".conversion-arrow");
+const authorText = document.querySelectorAll(".author-text");
+const hiddenElements = document.querySelectorAll(".hidden");
 
-      // need to save height here so it can revert on mouseout
-      $container.data("origHeight", $container.height());
+const date = document.querySelector(".date");
 
-      // so it can retain it's rollover color all the while the dropdown is open
-      $anchor.addClass("hover");
+// Get current date
+let today = new Date();
+let day = String(today.getDate()).padStart(2, "0");
+let year = today.getFullYear();
+let month = today.toLocaleString("default", { month: "long" });
 
-      // make sure dropdown appears directly below parent list item
-      $list.show().css({
-        paddingTop: $container.data("origHeight")
-      });
+window.onload = () => {
+  date.innerHTML = month.substring(0, 3) + " " + day + ", " + year;
+};
 
-      // don't do any animation if list shorter than max
-      if (multiplier > 1) {
-        $container
-          .css({
-            height: maxHeight,
-            overflow: "hidden"
-          })
-          .mousemove(function(e) {
-            var offset = $container.offset();
-            var relativeY =
-              (e.pageY - offset.top) * multiplier -
-              $container.data("origHeight") * multiplier;
-            if (relativeY > $container.data("origHeight")) {
-              $list.css("top", -relativeY + $container.data("origHeight"));
-            }
-          });
-      }
-    },
-    function() {
-      var $el = $(this);
-
-      // put things back to normal
-      $el
-        .height($(this).data("origHeight"))
-        .find("ul")
-        .css({ top: 0 })
-        .hide()
-        .end()
-        .find("a")
-        .removeClass("hover");
-    }
-  );
+// Menu Overlay
+menuCheckbox.addEventListener("change", () => {
+  if (menuCheckbox.checked) {
+    topContainer.classList.add("overlay");
+    bottomContainer.classList.add("overlay");
+    container.classList.add("bg-black");
+    topRow.classList.add("top-row-menu");
+    // root.style.setProperty("--menu-color", "#e95f5d");
+    refreshButton.style.display = "none";
+    conversionArrow.style.display = "none";
+    date.style.display = "none";
+    middleRow.style.display = "none";
+    bottomRow.style.display = "none";
+    inputRowTwo.style.display = "none";
+    authorText.forEach(element => element.classList.add("author-text-white"));
+    hiddenElements.forEach(element => element.classList.remove("hidden"));
+  } else {
+    topContainer.classList.remove("overlay");
+    bottomContainer.classList.remove("overlay");
+    container.classList.remove("bg-black");
+    topRow.classList.remove("top-row-menu");
+    // root.style.setProperty("--menu-color", "white");
+    refreshButton.style.display = "";
+    conversionArrow.style.display = "";
+    date.style.display = "";
+    middleRow.style.display = "";
+    bottomRow.style.display = "";
+    inputRowTwo.style.display = "";
+    authorText.forEach(element =>
+      element.classList.remove("author-text-white")
+    );
+    hiddenElements.forEach(element => element.classList.add("hidden"));
+  }
 });
+
+refreshButton.addEventListener("click", () => {
+  refreshSymbol.classList.add("fa-spin");
+  setTimeout(function() {
+    refreshSymbol.classList.remove("fa-spin");
+  }, 1000);
+});
+
+// Navigation
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+  e = e || window.event;
+
+  // up arrow
+  if (e.keyCode == "38") {
+    alert("arrow up");
+
+    // down arrow
+  } else if (e.keyCode == "40") {
+    alert("arrow down");
+
+    // left arrow
+  } else if (e.keyCode == "37") {
+    alert("arrow left");
+
+    // right arrow
+  } else if (e.keyCode == "39") {
+    alert("arrow right");
+
+    // space
+  } else if (e.keyCode == "32") {
+    refreshButton.click();
+    refreshButton.classList.add("refresh-button-clicked");
+    setTimeout(function() {
+      refreshButton.classList.remove("refresh-button-clicked");
+    }, 1000);
+
+    // escape
+  } else if (e.keyCode == "27") {
+    menuCheckbox.click();
+  }
+}
