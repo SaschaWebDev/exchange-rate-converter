@@ -18,7 +18,26 @@ const conversionArrow = document.querySelector(".conversion-arrow");
 const authorText = document.querySelectorAll(".author-text");
 const hiddenElements = document.querySelectorAll(".hidden");
 
+const btcTop = document.getElementById("btc");
+const satTop = document.getElementById("sat");
+const usdTop = document.getElementById("usd");
+const eurTop = document.getElementById("eur");
+
+const btcBottom = document.getElementById("btc-red");
+const satBottom = document.getElementById("sat-red");
+const usdBottom = document.getElementById("usd-red");
+const eurBottom = document.getElementById("eur-red");
+
+const picker = document.getElementById("picker");
+
 const date = document.querySelector(".date");
+
+// Vanilla JavaScript allows no API key hiding or environmental variable usage
+// A back-end solution just for this would render in a bad experience for users
+// since I need a free hoster and Heroku servers go to sleep constantly making
+// the frontend slow on every startup. Also the domain is too specific to
+// ask a user to provide his own API key. Thus this is willingly public.
+const alphaVantage = "2ENJF9F7J0AO0SXY";
 
 // Get current date
 let today = new Date();
@@ -27,7 +46,17 @@ let year = today.getFullYear();
 let month = today.toLocaleString("default", { month: "long" });
 
 window.onload = () => {
+  // set current date
   date.innerHTML = month.substring(0, 3) + " " + day + ", " + year;
+
+  // load / set localStorage for preference currency pair
+  if (localStorage.getItem("currency-top") === null) {
+    localStorage.setItem("currency-top", "btc");
+  }
+
+  if (localStorage.getItem("currency-bottom") === null) {
+    localStorage.setItem("currency-bottom", "usd");
+  }
 };
 
 // Menu Overlay
@@ -65,6 +94,7 @@ menuCheckbox.addEventListener("change", () => {
   }
 });
 
+// Data fetch and Refresh Button
 refreshButton.addEventListener("click", () => {
   refreshSymbol.classList.add("fa-spin");
   setTimeout(function() {
@@ -72,8 +102,62 @@ refreshButton.addEventListener("click", () => {
   }, 1000);
 });
 
-// Navigation
+// Currency selecting
+btcTop.addEventListener("click", () => {
+  if (activeTop()[0].id !== "btc") {
+    deleteSelection(picker);
+    picker.classList.add("selected-top-first");
+    deleteActive();
+    btcTop.classList.add("active");
+  }
+});
 
+satTop.addEventListener("click", () => {
+  if (activeTop()[0].id !== "sat") {
+    deleteSelection(picker);
+    picker.classList.add("selected-top-second");
+    deleteActive();
+    satTop.classList.add("active");
+  }
+});
+
+usdTop.addEventListener("click", () => {
+  if (activeTop()[0].id !== "usd") {
+    deleteSelection(picker);
+    picker.classList.add("selected-top-third");
+    deleteActive();
+    usdTop.classList.add("active");
+  }
+});
+
+eurTop.addEventListener("click", () => {
+  if (activeTop()[0].id !== "eur") {
+    deleteSelection(picker);
+    picker.classList.add("selected-top-fourth");
+    deleteActive();
+    eurTop.classList.add("active");
+  }
+});
+
+activeTop = () => document.querySelectorAll(".active");
+activeBottom = () => document.querySelectorAll(".active-red");
+deleteSelection = element => {
+  element.classList.remove("selected-top-first");
+  element.classList.remove("selected-top-second");
+  element.classList.remove("selected-top-third");
+  element.classList.remove("selected-top-fourth");
+
+  element.classList.remove("selected-bottom-first");
+  element.classList.remove("selected-bottom-second");
+  element.classList.remove("selected-bottom-third");
+  element.classList.remove("selected-bottom-fourth");
+};
+deleteActive = () =>
+  document
+    .querySelectorAll(".active")
+    .forEach(element => element.classList.remove("active"));
+
+// Navigation
 document.onkeydown = checkKey;
 
 function checkKey(e) {
