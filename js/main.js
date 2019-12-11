@@ -137,7 +137,7 @@ refreshButton.addEventListener("click", () => {
 
     setTimeout(function() {
       refreshButton.classList.remove("refresh-button-triggered");
-    }, 100);
+    }, 180);
 
     setTimeout(function() {
       refreshSymbol.classList.remove("fa-spin");
@@ -322,19 +322,54 @@ function checkKey(e) {
 
   // up arrow
   if (e.keyCode == "38") {
-    alert("arrow up");
-
+    if (
+      checkInBoundSelection(
+        parseInt(localStorage.getItem("currency-top-counter")) - 1
+      )
+    ) {
+      selectNewCurrency(
+        parseInt(localStorage.getItem("currency-top-counter")) - 1,
+        "top"
+      );
+    }
     // down arrow
   } else if (e.keyCode == "40") {
-    alert("arrow down");
+    if (
+      checkInBoundSelection(
+        parseInt(localStorage.getItem("currency-top-counter")) + 1
+      )
+    ) {
+      selectNewCurrency(
+        parseInt(localStorage.getItem("currency-top-counter")) + 1,
+        "top"
+      );
+    }
 
     // left arrow
   } else if (e.keyCode == "37") {
-    alert("arrow left");
+    if (
+      checkInBoundSelection(
+        parseInt(localStorage.getItem("currency-bottom-counter")) - 1
+      )
+    ) {
+      selectNewCurrency(
+        parseInt(localStorage.getItem("currency-bottom-counter")) - 1,
+        "bottom"
+      );
+    }
 
     // right arrow
   } else if (e.keyCode == "39") {
-    alert("arrow right");
+    if (
+      checkInBoundSelection(
+        parseInt(localStorage.getItem("currency-bottom-counter")) + 1
+      )
+    ) {
+      selectNewCurrency(
+        parseInt(localStorage.getItem("currency-bottom-counter")) + 1,
+        "bottom"
+      );
+    }
 
     // space
   } else if (e.keyCode == "32") {
@@ -350,3 +385,29 @@ function checkKey(e) {
     menuCheckbox.click();
   }
 }
+
+checkInBoundSelection = newIndex => newIndex >= 1 && newIndex <= 4;
+
+selectNewCurrency = (newIndex, panel) => {
+  if (panel === "top") {
+    if (newIndex == 1) {
+      selectBTCTop();
+    } else if (newIndex == 2) {
+      selectSATTop();
+    } else if (newIndex == 3) {
+      selectUSDTop();
+    } else if (newIndex == 4) {
+      selectEURTop();
+    }
+  } else if (panel == "bottom") {
+    if (newIndex == 1) {
+      selectBTCBottom();
+    } else if (newIndex == 2) {
+      selectSATBottom();
+    } else if (newIndex == 3) {
+      selectUSDBottom();
+    } else if (newIndex == 4) {
+      selectEURBottom();
+    }
+  }
+};
