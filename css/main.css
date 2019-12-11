@@ -293,9 +293,32 @@ input[type="number"] {
   left: 57.8%;
   top: 50.7%;
   transform: translate(-50%, -50%);
+
+  outline: none;
+  border: none;
+  background: linear-gradient(0deg, #e3edf7, #e3edf7);
+  box-shadow: 4px 2px 16px rgba(136, 165, 191, 0.315),
+    -4px -2px 16px rgba(230, 202, 202, 0.596);
+  border-radius: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.refresh-button:hover {
+.refresh-button:active {
+  background: #e3edf7;
+  box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48),
+    inset -3px -3px 7px #ffffff;
+  border-radius: 16px;
+}
+
+#refresh-symbol {
+  position: fixed;
+  font-size: 2rem;
+}
+
+/* .refresh-button:hover {
   background: rgb(253, 244, 244);
   transition: background 0.2s ease-in;
   cursor: pointer;
@@ -308,7 +331,7 @@ input[type="number"] {
 .refresh-button-clicked {
   background: rgb(255, 255, 255);
   transition: 0.3s ease-in-out;
-}
+} */
 
 #refresh-symbol {
   color: #e84f4e;
