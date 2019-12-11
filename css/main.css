@@ -526,6 +526,28 @@ author-text:visited {
   transition: 0.2s ease-in;
 }
 
+/* .result-container:hover:after {
+  content: "Click to copy to clipboard";
+  position: absolute;
+  top: 72vh;
+  left: 43vw;
+  right: 56vw;
+  padding: 1rem;
+  background-color: rgba(15, 13, 13, 0.192);
+  color: rgb(255, 255, 255);
+  width: 5rem;
+  font-weight: 800;
+  border-radius: 10px;
+} */
+
+.result-input:hover {
+  background-image: url("/assets/copy-clipboard.png");
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  color: rgba(182, 83, 83, 0);
+}
+
 /* Menu Icon */
 .toggle {
   display: block;
