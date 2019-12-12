@@ -35,6 +35,8 @@ const pickerRed = document.getElementById("picker-red");
 
 const date = document.querySelector(".date");
 
+let lastInputDot = 0;
+let lastInputDelete = 0;
 let priceFetching = false;
 
 // Vanilla JavaScript allows no API key hiding or environmental variable usage
@@ -420,6 +422,10 @@ setErrorShakeEffect = element => {
   }
 };
 
+spinTheArrowButtonShort = () => {
+  refreshButton.click();
+};
+
 // Navigation
 document.onkeydown = checkKey;
 
@@ -449,6 +455,18 @@ function checkKey(e) {
         parseInt(localStorage.getItem("currency-top-counter")) + 1,
         "top"
       );
+    }
+
+    // if . was pressed set lastInputDot to true so that inputBox can append it again
+  } else if (e.keyCode == "190") {
+    if (amountInputFocus) {
+      lastInputDot = lastInputDot + 1;
+    }
+
+    // if delete was presses set lastInputDelete to check if a dot was deleted for example
+  } else if (e.keyCode == "8") {
+    if (amountInputFocus) {
+      lastInputDelete = lastInputDelete + 1;
     }
 
     // left arrow
@@ -621,13 +639,60 @@ resultInput.addEventListener("click", () => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  amountInput.addEventListener("focusin", function() {
+    amountInputFocus = true;
+    console.log("GOTFOCUS");
+  });
+
+  amountInput.addEventListener("focusout", function() {
+    amountInputFocus = false;
+    console.log("LOSTFOCUS");
+  });
+});
+
+amountInput.addEventListener("keypress", e => {
+  console.log("KEYDOWN", e.target.value);
+});
+
 // Convertion
-
-// Menu Overlay
-
-amountInput.addEventListener("beforeinput", e => {
+amountInput.addEventListener("input", e => {
+  console.log("VALUE", amountInput.value);
+  if (amountInput.value.length == 2) {
+    amountInput.value = parseFloat(e.target.value, 10);
+  }
+  console.log("LASTINPUTDOT ", lastInputDot);
+  console.log("LASTDELETE ", lastInputDelete);
   if (e.target.value == "") {
-    // e.target.value = 1;
+    if (lastInputDot == 1) {
+    } else if (lastInputDot == 2 && lastInputDelete < 1) {
+      alert("THIS CASE");
+      resultInput.value = 0;
+      amountInput.value = 0;
+      lastInputDot = 0;
+      lastInputDelete = 0;
+    } else if (lastInputDot == 2 && lastInputDelete > 1) {
+      console.log("WE HAVE TO DOTS BUT DELETED ONE");
+      lastInputDot = lastInputDot - 1;
+      lastInputDelete = 0;
+    } else if (lastInputDot == 2) {
+      console.log("SECOND WEIRD ONE");
+      lastInputDot = lastInputDot - 1;
+      lastInputDelete = 0;
+    } else {
+      alert("HMMMM");
+      resultInput.value = 0;
+      amountInput.value = 0;
+      lastInputDot = 0;
+      lastInputDelete = 0;
+    }
+    if (lastInputDelete == 1) {
+      alert("NOW");
+      resultInput.value = 0;
+      amountInput.value = 0;
+      lastInputDot = 0;
+      lastInputDelete = 0;
+    }
   } else {
     triggerConvertion();
   }
@@ -637,12 +702,14 @@ triggerConvertion = () => {
   if (resultInput.value !== "") {
     if (localStorage.getItem("currency-top") === "btc") {
       if (localStorage.getItem("currency-bottom") === "sat") {
+        spinTheArrowButtonShort();
         resultInput.value = bitcoinToSatoshi(
           parseFloat(amountInput.value)
         ).toFixed(0);
       }
     } else if (localStorage.getItem("currency-top") === "sat") {
       if (localStorage.getItem("currency-bottom") === "btc") {
+        spinTheArrowButtonShort();
         resultInput.value = satoshiToBitcoin(
           parseFloat(amountInput.value)
         ).toLocaleString("en-US", {

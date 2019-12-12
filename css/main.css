@@ -546,6 +546,11 @@ author-text:visited {
   background-repeat: no-repeat;
   background-position: 50% 50%;
   color: rgba(182, 83, 83, 0);
+  outline: none;
+}
+
+.result-input:active {
+  background-color: rgba(235, 228, 228, 0.315);
 }
 
 /* Menu Icon */
