@@ -71,8 +71,7 @@
         <div class="bottom-left-container">
           <input class="top-input" min="0" type="number"
             onkeydown="if (event.keyCode === 189 || event.keyCode === 188 || event.keyCode === 69) {event.preventDefault();}"
-            value="1">
-          </input>
+            value="1"></input>
         </div>
         <div class="bottom-right-container">
           <div class="currency-pick-left">
@@ -98,7 +97,7 @@
       <div class="bottom-row input-row-two">
         <div class="bottom-left-container result-container">
           <input class="top-input border-red hover-pointer red result-input" tabIndex="-1"
-            onkeydown="if (event.keyCode === 189 || event.keyCode === 188 || event.keyCode === 69) {event.preventDefault();}"
+            onkeydown="return (event.keyCode!=188 || event.keyCode !=189 || event.keyCode != 69)" value="1"
             readonly></input>
         </div>
         <div class="bottom-right-container container-red">
