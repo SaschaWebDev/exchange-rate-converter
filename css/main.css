@@ -867,3 +867,29 @@ author-text:visited {
     -ms-transform: translate(0px, 0px);
   }
 }
+
+
+/* Media Queries */
+
+/* Ipad */
+@media screen and (max-width: 900px) and (min-width: 750px) {
+  .refresh-button {
+    left: 70.5%;
+    top: 50.7%;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 951px) {
+  .refresh-button {
+    left: 65.5%;
+    top: 50.7%;
+  }
+
+  .bottom-row {
+    margin-top: 7rem;
+  }
+
+  .conversion-arrow {
+    top: 51.25%;
+  }
+}
