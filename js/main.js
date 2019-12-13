@@ -927,7 +927,32 @@ triggerConvertion = () => {
           }, 2500);
         }
       } else if (localStorage.getItem("currency-bottom") === "eur") {
-        console.log("Not yet implemented")
+        resultInput.value = 0;
+        killId();
+
+        if(localStorage.getItem("usd-eur-update") !== null && localStorage.getItem("usd-eur-update").length > 0) {
+            if (moreThanOneHourAgo(Date.parse(localStorage.getItem("usd-eur-update")))) {
+              spinTheArrowButtonFetch();
+              getUSDPriceEUR();
+              setTimeout(function() {
+                if (localStorage.getItem("currency-bottom-counter") == 4) {
+                  localStorage.getItem("usd-eur-update") !== null && localStorage.getItem("usd-eur-update").length > 0 ? resultInput.value = usdToEUR(amountInput.value).toFixed(2) : resultInput.value = "Sorry broken"
+                }
+              }, 2500);
+            } else {
+              spinTheArrowButtonInstant();
+              resultInput.value = usdToEUR(amountInput.value).toFixed(2);
+            }
+        } else {
+        spinTheArrowButtonFetch();
+        getUSDPriceEUR();
+        setTimeout(function() {
+          if (localStorage.getItem("currency-bottom-counter") == 4) {
+            localStorage.getItem("usd-eur-update") !== null && localStorage.getItem("usd-eur-update").length > 0 
+            ? resultInput.value = usdToEUR(amountInput.value).toFixed(2) : resultInput.value = "Sorry broken"
+            }
+          }, 2500);
+        }
       }
     } else if (localStorage.getItem("currency-top") === "eur") {
       if (localStorage.getItem("currency-bottom") === "btc") {
@@ -985,7 +1010,32 @@ triggerConvertion = () => {
           }, 2500);
         }
       } else if (localStorage.getItem("currency-bottom") === "usd") {
-        console.log("Not yet implemented")
+        resultInput.value = 0;
+        killId();
+
+        if(localStorage.getItem("usd-eur-update") !== null && localStorage.getItem("usd-eur-update").length > 0) {
+            if (moreThanOneHourAgo(Date.parse(localStorage.getItem("usd-eur-update")))) {
+              spinTheArrowButtonFetch();
+              getUSDPriceEUR();
+              setTimeout(function() {
+                if (localStorage.getItem("currency-bottom-counter") == 3) {
+                  localStorage.getItem("usd-eur-update") !== null && localStorage.getItem("usd-eur-update").length > 0 ? resultInput.value = eurToUSD(amountInput.value).toFixed(2) : resultInput.value = "Sorry broken"
+                }
+              }, 2500);
+            } else {
+              spinTheArrowButtonInstant();
+              resultInput.value = eurToUSD(amountInput.value).toFixed(2);
+            }
+        } else {
+        spinTheArrowButtonFetch();
+        getUSDPriceEUR();
+        setTimeout(function() {
+          if (localStorage.getItem("currency-bottom-counter") == 3) {
+            localStorage.getItem("usd-eur-update") !== null && localStorage.getItem("usd-eur-update").length > 0 
+            ? resultInput.value = eurToUSD(amountInput.value).toFixed(2) : resultInput.value = "Sorry broken"
+            }
+          }, 2500);
+        }
       }
 
 
@@ -1025,6 +1075,17 @@ getBitcoinPriceEUR = () => {
     }
   );
 };
+
+getUSDPriceEUR = () => {
+  fetch("https://free.currconv.com/api/v7/convert?q=USD_EUR&compact=ultra&apiKey=8819b1e0f2f4add7fbd8")
+  .then(response => response.json())
+  .then(data => {
+    localStorage.setItem("usd-eur", parseFloat(data["USD_EUR"]));
+    localStorage.setItem("usd-eur-update", Date.now());
+    console.log(data["USD_EUR"])
+    }
+  );
+}
 
 // Price calculation
 bitcoinToSatoshi = amountBitcoin => amountBitcoin * 100_000_000;

@@ -299,7 +299,7 @@ input[type="number"] {
   background: linear-gradient(0deg, #e3edf7, #e3edf7);
   box-shadow: 4px 2px 16px rgba(136, 165, 191, 0.315),
     -4px -2px 16px rgba(230, 202, 202, 0.596);
-  border-radius: 16px;
+  border-radius: 10px;
 
   display: flex;
   justify-content: center;
