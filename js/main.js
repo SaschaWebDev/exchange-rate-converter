@@ -156,6 +156,7 @@ refreshButton.addEventListener("click", () => {
       refreshSymbol.classList.remove("fa-spin");
     }, 1000);
   }
+  triggerConvertion();
 });
 
 // Currency on Click
@@ -764,22 +765,20 @@ triggerConvertion = () => {
               getBitcoinPriceUSD();
               setTimeout(function() {
                 if (localStorage.getItem("currency-bottom-counter") == 3) {
-                  console.log("SETTING IT NO BECAUSE COUNTER 3")
-                  localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 ? resultInput.value = localStorage.getItem("btc-usd") : resultInput.value = "Sorry broken"
+                  localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 ? resultInput.value = bitcoinToUSD(amountInput.value) : resultInput.value = "Sorry broken"
                 }
               }, 2500);
             } else {
               spinTheArrowButtonInstant();
-              resultInput.value = localStorage.getItem("btc-usd")
+              resultInput.value = bitcoinToUSD(amountInput.value);
             }
         } else {
         spinTheArrowButtonFetch();
         getBitcoinPriceUSD();
         setTimeout(function() {
           if (localStorage.getItem("currency-bottom-counter") == 3) {
-            console.log("OTHER 3")
             localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 
-            ? resultInput.value = localStorage.getItem("btc-usd") : resultInput.value = "Sorry broken"
+            ? resultInput.value = bitcoinToUSD(amountInput.value) : resultInput.value = "Sorry broken"
             }
           }, 2500);
         }
@@ -793,38 +792,203 @@ triggerConvertion = () => {
               getBitcoinPriceEUR();
               setTimeout(function() {
                 if (localStorage.getItem("currency-bottom-counter") == 4) {
-                  console.log("SETTING IT NO BECAUSE COUNTER 4")
-                  localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0 ? resultInput.value = localStorage.getItem("btc-eur") : resultInput.value = "Sorry broken"
+                  localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0 ? resultInput.value = bitcoinToEUR(amountInput.value) : resultInput.value = "Sorry broken"
                 }
               }, 2500);
             } else {
               spinTheArrowButtonInstant();
-              resultInput.value = localStorage.getItem("btc-eur")
+              resultInput.value = bitcoinToEUR(amountInput.value);
             }
         } else {
           spinTheArrowButtonFetch();
           getBitcoinPriceEUR();
           setTimeout(function() {
             if (localStorage.getItem("currency-bottom-counter") == 4) {
-              console.log("OTHER 4")
-
               localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 
-              ? resultInput.value = localStorage.getItem("btc-eur") : resultInput.value = "Sorry broken";
+              ? resultInput.value = bitcoinToEUR(amountInput.value) : resultInput.value = "Sorry broken";
+            }
+          }, 2500);
+        }
+      }
+    } else if (localStorage.getItem("currency-top") === "sat") {
+      if (localStorage.getItem("currency-bottom") === "btc") {
+        spinTheArrowButtonInstant();
+        if(amountInput.value.length >= 1) {resultInput.value = satoshiToBitcoin(
+          parseFloat(amountInput.value)
+        ).toFixed(8)}
+      } else if (localStorage.getItem("currency-bottom") === "usd") {
+        resultInput.value = 0;
+        killId();
+
+        if(localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0) {
+            if (moreThanOneHourAgo(Date.parse(localStorage.getItem("btc-usd-update")))) {
+              spinTheArrowButtonFetch();
+              getBitcoinPriceUSD();
+              setTimeout(function() {
+                if (localStorage.getItem("currency-bottom-counter") == 3) {
+                  localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 ? resultInput.value = satoshiToUSD(amountInput.value) : resultInput.value = "Sorry broken"
+                }
+              }, 2500);
+            } else {
+              spinTheArrowButtonInstant();
+              resultInput.value = satoshiToUSD(amountInput.value);
+            }
+        } else {
+        spinTheArrowButtonFetch();
+        getBitcoinPriceUSD();
+        setTimeout(function() {
+          if (localStorage.getItem("currency-bottom-counter") == 3) {
+            localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 
+            ? resultInput.value = satoshiToUSD(amountInput.value) : resultInput.value = "Sorry broken"
+            }
+          }, 2500);
+        }
+      } else if (localStorage.getItem("currency-bottom") === "eur") {
+        resultInput.value = 0;
+        killId();
+
+        if(localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0) {
+            if (moreThanOneHourAgo(Date.parse(localStorage.getItem("btc-eur-update")))) {
+              spinTheArrowButtonFetch();
+              getBitcoinPriceEUR();
+              setTimeout(function() {
+                if (localStorage.getItem("currency-bottom-counter") == 4) {
+                  localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0 ? resultInput.value = satoshiToEUR(amountInput.value) : resultInput.value = "Sorry broken"
+                }
+              }, 2500);
+            } else {
+              spinTheArrowButtonInstant();
+              resultInput.value = satoshiToEUR(amountInput.value);
+            }
+        } else {
+          spinTheArrowButtonFetch();
+          getBitcoinPriceEUR();
+          setTimeout(function() {
+            if (localStorage.getItem("currency-bottom-counter") == 4) {
+              localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 
+              ? resultInput.value = satoshiToEUR(amountInput.value) : resultInput.value = "Sorry broken";
             }
           }, 2500);
         }
       }
     } else if (localStorage.getItem("currency-top") === "usd") {
       if (localStorage.getItem("currency-bottom") === "btc") {
-        spinTheArrowButtonInstant();
-        resultInput.value = satoshiToBitcoin(
-          parseFloat(amountInput.value)
-        ).toLocaleString("en-US", {
-          style: "decimal",
-          currency: "USD",
-          minimumFractionDigits: 8
-        });
+        resultInput.value = 0;
+        killId();
+
+        if(localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0) {
+            if (moreThanOneHourAgo(Date.parse(localStorage.getItem("btc-usd-update")))) {
+              spinTheArrowButtonFetch();
+              getBitcoinPriceUSD();
+              setTimeout(function() {
+                if (localStorage.getItem("currency-bottom-counter") == 1) {
+                  localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 ? resultInput.value = usdToBitcoin(amountInput.value).toFixed(8) : resultInput.value = "Sorry broken"
+                }
+              }, 2500);
+            } else {
+              spinTheArrowButtonInstant();
+              resultInput.value = usdToBitcoin(amountInput.value).toFixed(8);
+            }
+        } else {
+        spinTheArrowButtonFetch();
+        getBitcoinPriceUSD();
+        setTimeout(function() {
+          if (localStorage.getItem("currency-bottom-counter") == 1) {
+            localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 
+            ? resultInput.value = usdToBitcoin(amountInput.value).toFixed(8) : resultInput.value = "Sorry broken"
+            }
+          }, 2500);
+        }
+      } else if (localStorage.getItem("currency-bottom") === "sat") {
+        resultInput.value = 0;
+        killId();
+
+        if(localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0) {
+            if (moreThanOneHourAgo(Date.parse(localStorage.getItem("btc-usd-update")))) {
+              spinTheArrowButtonFetch();
+              getBitcoinPriceUSD();
+              setTimeout(function() {
+                if (localStorage.getItem("currency-bottom-counter") == 2) {
+                  localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 ? resultInput.value = usdToSatoshi(amountInput.value).toFixed(0) : resultInput.value = "Sorry broken"
+                }
+              }, 2500);
+            } else {
+              spinTheArrowButtonInstant();
+              resultInput.value = usdToSatoshi(amountInput.value).toFixed(0);
+            }
+        } else {
+        spinTheArrowButtonFetch();
+        getBitcoinPriceUSD();
+        setTimeout(function() {
+          if (localStorage.getItem("currency-bottom-counter") == 2) {
+            localStorage.getItem("btc-usd-update") !== null && localStorage.getItem("btc-usd-update").length > 0 
+            ? resultInput.value = usdToSatoshi(amountInput.value).toFixed(0) : resultInput.value = "Sorry broken"
+            }
+          }, 2500);
+        }
+      } else if (localStorage.getItem("currency-bottom") === "eur") {
+        console.log("Not yet implemented")
       }
+    } else if (localStorage.getItem("currency-top") === "eur") {
+      if (localStorage.getItem("currency-bottom") === "btc") {
+        resultInput.value = 0;
+        killId();
+
+        if(localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0) {
+            if (moreThanOneHourAgo(Date.parse(localStorage.getItem("btc-eur-update")))) {
+              spinTheArrowButtonFetch();
+              getBitcoinPriceEUR();
+              setTimeout(function() {
+                if (localStorage.getItem("currency-bottom-counter") == 1) {
+                  localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0 ? resultInput.value = eurToBitcoin(amountInput.value).toFixed(8) : resultInput.value = "Sorry broken"
+                }
+              }, 2500);
+            } else {
+              spinTheArrowButtonInstant();
+              resultInput.value = eurToBitcoin(amountInput.value).toFixed(8);
+            }
+        } else {
+        spinTheArrowButtonFetch();
+        getBitcoinPriceEUR();
+        setTimeout(function() {
+          if (localStorage.getItem("currency-bottom-counter") == 1) {
+            localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eurupdate").length > 0 
+            ? resultInput.value = eurToBitcoin(amountInput.value).toFixed(8) : resultInput.value = "Sorry broken"
+            }
+          }, 2500);
+        }
+      } else if (localStorage.getItem("currency-bottom") === "sat") {
+        resultInput.value = 0;
+        killId();
+
+        if(localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0) {
+            if (moreThanOneHourAgo(Date.parse(localStorage.getItem("btc-eur-update")))) {
+              spinTheArrowButtonFetch();
+              getBitcoinPriceEUR();
+              setTimeout(function() {
+                if (localStorage.getItem("currency-bottom-counter") == 2) {
+                  localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0 ? resultInput.value = eurToSatoshi(amountInput.value) : resultInput.value = "Sorry broken"
+                }
+              }, 2500);
+            } else {
+              spinTheArrowButtonInstant();
+              resultInput.value = eurToSatoshi(amountInput.value);
+            }
+        } else {
+        spinTheArrowButtonFetch();
+        getBitcoinPriceEUR();
+        setTimeout(function() {
+          if (localStorage.getItem("currency-bottom-counter") == 2) {
+            localStorage.getItem("btc-eur-update") !== null && localStorage.getItem("btc-eur-update").length > 0 
+            ? resultInput.value = eurToSatoshi(amountInput.value) : resultInput.value = "Sorry broken"
+            }
+          }, 2500);
+        }
+      } else if (localStorage.getItem("currency-bottom") === "usd") {
+        console.log("Not yet implemented")
+      }
+
+
     }
   }
 };
@@ -848,7 +1012,6 @@ getBitcoinPriceUSD = () => {
   .then(data => {
     localStorage.setItem("btc-usd", parseFloat(data[0].price).toFixed(2));
     localStorage.setItem("btc-usd-update", Date.now());
-    console.log("FETCHED NEW USD PRICES FOR YOU!")
     }
   );
 };
@@ -859,24 +1022,39 @@ getBitcoinPriceEUR = () => {
   .then(data => {
     localStorage.setItem("btc-eur", parseFloat(data[0].price).toFixed(2));
     localStorage.setItem("btc-eur-update", Date.now());
-    console.log("FETCHED NEW EUR PRICES FOR YOU!")
     }
   );
 };
-// fetch(
-//   "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=CNY&apikey=demo" +
-//     alphaVantage
-// )
-//   .then(function(response) {
-//     // The API call was successful!
-//     console.log("success!", response);
-//   })
-//   .catch(function(err) {
-//     // There was an error
-//     console.log("Something went wrong.", err);
-//   });
 
 // Price calculation
 bitcoinToSatoshi = amountBitcoin => amountBitcoin * 100_000_000;
+bitcoinToUSD = amountBitcoin => roundNumber(amountBitcoin * parseFloat(localStorage.getItem("btc-usd")), 2);
+bitcoinToEUR = amountBitcoin => roundNumber(amountBitcoin * parseFloat(localStorage.getItem("btc-eur")), 2);
 
 satoshiToBitcoin = amountSatoshi => amountSatoshi / 100_000_000;
+satoshiToUSD = amountSatoshi => roundNumber((amountSatoshi / 100_000_100) * parseFloat(localStorage.getItem("btc-usd")), 8);
+satoshiToEUR = amountEuro => roundNumber((amountEuro / 100_000_000) * parseFloat(localStorage.getItem("btc-eur")), 8);
+
+usdToBitcoin= amountUSD => amountUSD / parseFloat(localStorage.getItem("btc-usd"));
+usdToSatoshi= amountEuro => amountEuro / (parseFloat(localStorage.getItem("btc-usd")) / 100_000_000);
+usdToEUR = amountEuro => roundNumber(amountEuro * parseFloat(localStorage.getItem("usd-eur")), 2);
+
+eurToBitcoin = amountEuro => amountEuro / parseFloat(localStorage.getItem("btc-eur"));
+eurToSatoshi= amountEuro => (amountEuro / (parseFloat(localStorage.getItem("btc-eur")) / 100_000_000));
+eurToUSD = amountEuro => roundNumber(amountEuro / parseFloat(localStorage.getItem("usd-eur")), 2);
+
+// Rounding
+
+ // ROUNDING Math
+function roundNumber(num, scale) {
+  if(!("" + num).includes("e")) {
+    return +(Math.round(num + "e+" + scale)  + "e-" + scale);
+  } else {
+    var arr = ("" + num).split("e");
+    var sig = ""
+    if(+arr[1] + scale > 0) {
+      sig = "+";
+    }
+    return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
+  }
+}
